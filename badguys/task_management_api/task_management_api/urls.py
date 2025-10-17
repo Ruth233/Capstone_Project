@@ -1,4 +1,4 @@
-"""
+u"""
 URL configuration for task_management_api project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -16,9 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import JsonResponse
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+def api_root(request):
+    return JsonResponse({
+        "message": "Welcome to Task Management API",
+        "endpoints": {
+            "admin": "/admin/",
+            "users": "/api/users/",
+            "tasks": "/api/tasks/",
+            "token_obtain": "/api/token/",
+            "token_refresh": "/api/token/refresh/"
+        }
+    })
+
 urlpatterns = [
+    path('', api_root, name='api_root'),
     path('admin/', admin.site.urls),
     path('api/', include('tasks.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
