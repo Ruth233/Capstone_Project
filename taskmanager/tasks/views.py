@@ -7,8 +7,9 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Task
-from .serializers import TaskSerializer, UserSerializer
+from .sarializers import TaskSerializer, UserSerializer
 from .permissions import IsOwnerOrAdmin
+from .filters import TaskFilter
 
 # Create your views here.
 
